@@ -4,12 +4,13 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 
-def index(request):
+def index(request, all_=None):
     """Index page."""
     topics = sorted(
         settings.TOPICS.items(), key=lambda x: x[1]['upvotes'],
         reverse=True,
     )
+    topics = topics if all_ == 'all' else topics[:20]
     return render(request, 'index.html', {'topics': topics})
 
 
