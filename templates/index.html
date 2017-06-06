@@ -50,12 +50,14 @@
                           {% for uuid, topic in topics %}
                           <ul class="nav nav-stacked" id="{{ uuid }}">
                               <li class="panel">
-                                  <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
-                                    {{ topic.title }}
-                                  </a>
-                                  <div id="link_{{ uuid }}" class="panel-body collapse">
+                                  <div>
+                                    <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
+                                      {{ topic.title }}
+                                    </a>
                                     <a class="glyphicon glyphicon-thumbs-up" style="padding-right:10px;" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
                                     <a class="glyphicon glyphicon-thumbs-down" href="{% url 'vote' uuid 'downvotes' %}">{{ topic.downvotes}}</a>
+                                  </div>
+                                  <div id="link_{{ uuid }}" class="panel-body collapse">
                                     {{ topic.content }}
                                   </div>
                               </li>
