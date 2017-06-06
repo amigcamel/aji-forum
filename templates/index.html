@@ -2,20 +2,27 @@
 
 {% block main %}
 {% for uuid, topic in topics %}
-<ul class="nav nav-stacked" id="{{ uuid }}">
-    <li class="panel">
+<div class="nav nav-stacked" id="{{ uuid }}">
+    <div class="panel">
         <div>
-          <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
-            {{ forloop.counter }}. {{ topic.title }}
-          </a>
-          <a class="glyphicon glyphicon-thumbs-up" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
-          <a class="glyphicon glyphicon-thumbs-down" href="{% url 'vote' uuid 'downvotes' %}">{{ topic.downvotes}}</a>
+          <div class="row">
+              <div class="col-lg-8">
+                <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
+                  {{ forloop.counter }}. {{ topic.title }}
+                </a>
+                <a class="glyphicon glyphicon-thumbs-up" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
+                <a class="glyphicon glyphicon-thumbs-down" href="{% url 'vote' uuid 'downvotes' %}">{{ topic.downvotes}}</a>
+              </div>
+              <div class="col-lg-4 text-right">
+                <span>{{ topic.datetime | date:'Y-m-d H:i' }}</span>
+              </div>
+          </div>
         </div>
         <div id="link_{{ uuid }}" class="panel-body collapse">
           {{ topic.content }}
         </div>
-    </li>
-</ul>
+    </div>
+</div>
 {% endfor %}
 {% if not request.GET.all %}
   <hr />
