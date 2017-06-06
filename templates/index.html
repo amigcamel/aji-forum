@@ -15,6 +15,7 @@
         a.glyphicon {
             text-decoration: none;
             cursor: pointer;
+            padding-left: 10px;
         }
         </style>
     </head>
@@ -52,9 +53,9 @@
                               <li class="panel">
                                   <div>
                                     <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
-                                      {{ topic.title }}
+                                      {{ forloop.counter }}. {{ topic.title }}
                                     </a>
-                                    <a class="glyphicon glyphicon-thumbs-up" style="padding-right:10px;" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
+                                    <a class="glyphicon glyphicon-thumbs-up" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
                                     <a class="glyphicon glyphicon-thumbs-down" href="{% url 'vote' uuid 'downvotes' %}">{{ topic.downvotes}}</a>
                                   </div>
                                   <div id="link_{{ uuid }}" class="panel-body collapse">
