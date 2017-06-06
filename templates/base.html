@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A proof-of-concept forum allows users to submit, upvote and downvote posts.">
+        <meta name="author" content="Aji">
+        <title>Aji Forum</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+        body {
+            padding-top: 70px;
+        }
+        a.glyphicon {
+            text-decoration: none;
+            cursor: pointer;
+            padding-left: 10px;
+        }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Aji Forum</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="glyphicon glyphicon-home" href="{% url 'index' %}"> Home</a>
+                        </li>
+                        <li>
+                            <a class="glyphicon glyphicon-plus" href="#"> Publish</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for uuid, topic in topics %}
+                    <ul class="nav nav-stacked" id="{{ uuid }}">
+                        <li class="panel">
+                            <div>
+                              <a data-toggle="collapse" data-parent="#{{ uuid }}" href="#link_{{ uuid }}">
+                                {{ forloop.counter }}. {{ topic.title }}
+                              </a>
+                              <a class="glyphicon glyphicon-thumbs-up" href="{% url 'vote' uuid 'upvotes' %}">{{ topic.upvotes }}</a>
+                              <a class="glyphicon glyphicon-thumbs-down" href="{% url 'vote' uuid 'downvotes' %}">{{ topic.downvotes}}</a>
+                            </div>
+                            <div id="link_{{ uuid }}" class="panel-body collapse">
+                              {{ topic.content }}
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    {% if not request.GET.all %}
+                      <hr />
+                      <a class="btn btn-primary" href="{% url 'index' %}?all=true">Show All</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <script   src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>
