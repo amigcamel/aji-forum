@@ -129,3 +129,6 @@ ENV/
 
 # mkdocs documentation
 /site
+
+# collectstatic
+staticfiles
