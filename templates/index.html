@@ -12,6 +12,10 @@
         body {
             padding-top: 70px;
         }
+        a.glyphicon {
+            text-decoration: none;
+            cursor: pointer;
+        }
         </style>
     </head>
     <body>
@@ -43,15 +47,15 @@
                 <div class="col-lg-12">
                   <div class="row">
                       <div class="col-lg-12">
-                          {% for topic in topics %}
-                          <ul class="nav nav-stacked" id="{{ topic.id }}">
+                          {% for id, topic in topics %}
+                          <ul class="nav nav-stacked" id="{{ id }}">
                               <li class="panel">
-                                  <a data-toggle="collapse" data-parent="#{{ topic.id }}" href="#link_{{ topic.id }}">
+                                  <a data-toggle="collapse" data-parent="#{{ id }}" href="#link_{{ id }}">
                                     {{ topic.title }}
                                   </a>
-                                  <div id="link_{{ topic.id }}" class="panel-body collapse">
-                                    <span class="glyphicon glyphicon-thumbs-up" style="padding-right:10px;">{{ topic.upvotes }}</span>
-                                    <span class="glyphicon glyphicon-thumbs-down">{{ topic.downvotes}}</span>
+                                  <div id="link_{{ id }}" class="panel-body collapse">
+                                    <a class="glyphicon glyphicon-thumbs-up" style="padding-right:10px;">{{ topic.upvotes }}</a>
+                                    <a class="glyphicon glyphicon-thumbs-down">{{ topic.downvotes}}</a>
                                     {{ topic.content }}
                                   </div>
                               </li>
