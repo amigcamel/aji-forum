@@ -2,7 +2,7 @@
 from datetime import datetime
 import uuid
 
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
