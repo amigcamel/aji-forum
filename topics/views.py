@@ -1,6 +1,4 @@
 """Views."""
-from copy import deepcopy
-
 from django.shortcuts import render
 from django.conf import settings
 # from django.core.urlresolvers import reverse
@@ -8,12 +6,13 @@ from django.conf import settings
 
 def index(request):
     """Index page."""
-    return render(request, 'index.html', {'topics': settings.TOPICS})
-    TOPIC = {
-        'title': '',
-        'content': '',
-        'upvotes': 0,
-        'downvotes': 0,
-    }
-    settings.TOPICS.append(deepcopy(settings.TOPIC))
-    return HttpResponse(settings.TOPICS)
+    topics = sorted(
+        settings.TOPICS.items(), key=lambda x: x[1]['upvotes'],
+        reverse=True,
+    )
+    return render(request, 'index.html', {'topics': topics})
+
+
+def vote(request, uid, target):
+    """Vote up/down to a topic."""
+    settings.TOPICS
