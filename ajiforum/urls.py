@@ -9,4 +9,5 @@ urlpatterns = [
         topics.views.vote,
         name='vote'
     ),
+    url(r'^publish$', topics.views.publish, name='publish'),
 ]
