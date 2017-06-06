@@ -1,12 +1,14 @@
 """Django settings."""
 from os.path import dirname, abspath, join
+import os
 
 BASE_DIR = dirname(dirname(abspath(__file__)))
 SECRET_KEY = 'uzi-g3ri_95le=lj6i+t)=)+y1gkay8wcj9s8&ym$d@tlzsw2d'
-DEBUG = True
+DEBUG = True if int(os.environ.get('DEBUG', 0)) == 1 else False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'aji-forum.herokuapp.com',
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
